@@ -15,6 +15,7 @@ namespace Sequence
 		void update(Parent*);
 	private:
 		Image* mImage;
+		int mCursor;
 	};
 
 

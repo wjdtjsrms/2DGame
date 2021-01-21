@@ -15,7 +15,7 @@ namespace Sequence {
 		private:
 			Image * mImage;
 			int mCount;
-			bool mStarted; //
+			bool mStarted;
 		};
 
 	} //namespace Game

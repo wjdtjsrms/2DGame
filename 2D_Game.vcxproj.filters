@@ -33,22 +33,13 @@
     <ClCompile Include="Image.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Sequence\StageSelect.cpp">
-      <Filter>Sequence</Filter>
-    </ClCompile>
     <ClCompile Include="Sequence\Title.cpp">
       <Filter>Sequence</Filter>
     </ClCompile>
     <ClCompile Include="Sequence\Game\Clear.cpp">
       <Filter>Sequence\Game</Filter>
     </ClCompile>
-    <ClCompile Include="Sequence\Game\Loading.cpp">
-      <Filter>Sequence\Game</Filter>
-    </ClCompile>
     <ClCompile Include="Sequence\Game\Play.cpp">
-      <Filter>Sequence\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Sequence\Game\Menu.cpp">
       <Filter>Sequence\Game</Filter>
     </ClCompile>
     <ClCompile Include="Sequence\Parent.cpp">
@@ -57,8 +48,23 @@
     <ClCompile Include="Sequence\Game\GameParent.cpp">
       <Filter>Sequence\Game</Filter>
     </ClCompile>
-    <ClCompile Include="StringRenderer.cpp">
-      <Filter>소스 파일</Filter>
+    <ClCompile Include="Sequence\Game\Failure.cpp">
+      <Filter>Sequence\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Sequence\Game\Judge.cpp">
+      <Filter>Sequence\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Sequence\Game\Pause.cpp">
+      <Filter>Sequence\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Sequence\Game\Ready.cpp">
+      <Filter>Sequence\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Sequence\Ending.cpp">
+      <Filter>Sequence</Filter>
+    </ClCompile>
+    <ClCompile Include="Sequence\GameOver.cpp">
+      <Filter>Sequence</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -74,22 +80,13 @@
     <ClInclude Include="File.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Sequence\StageSelect.h">
-      <Filter>Sequence</Filter>
-    </ClInclude>
     <ClInclude Include="Sequence\Title.h">
       <Filter>Sequence</Filter>
     </ClInclude>
     <ClInclude Include="Sequence\Game\Clear.h">
       <Filter>Sequence\Game</Filter>
     </ClInclude>
-    <ClInclude Include="Sequence\Game\Loading.h">
-      <Filter>Sequence\Game</Filter>
-    </ClInclude>
     <ClInclude Include="Sequence\Game\Play.h">
-      <Filter>Sequence\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Sequence\Game\Menu.h">
       <Filter>Sequence\Game</Filter>
     </ClInclude>
     <ClInclude Include="Sequence\Parent.h">
@@ -98,8 +95,23 @@
     <ClInclude Include="Sequence\Game\GameParent.h">
       <Filter>Sequence\Game</Filter>
     </ClInclude>
-    <ClInclude Include="StringRenderer.h">
+    <ClInclude Include="Sequence\Game\Failure.h">
+      <Filter>Sequence\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Sequence\Game\Judge.h">
+      <Filter>Sequence\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Pause.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Sequence\Game\Ready.h">
+      <Filter>Sequence\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Sequence\Ending.h">
+      <Filter>Sequence</Filter>
+    </ClInclude>
+    <ClInclude Include="Sequence\GameOver.h">
+      <Filter>Sequence</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

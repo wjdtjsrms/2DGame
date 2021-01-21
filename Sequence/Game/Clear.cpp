@@ -27,7 +27,14 @@ namespace Sequence
 		{
 			if (mCount == 60) // 1ÃÊ ´ë±â
 			{
-				parent->moveTo(Parent::SEQ_STAGE_SELECT);
+				if (parent->hasFinalStageCleared())
+				{
+					parent->moveTo(Parent::NEXT_ENDING);
+				}
+				else
+				{
+					parent->moveTo(Parent::NEXT_READY);
+				}
 			}
 
 			parent->state()->draw();

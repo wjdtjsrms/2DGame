@@ -1,28 +1,47 @@
 #include "GameLib/GameLib.h"
 
 #include "Sequence/Parent.h"
-#include "Sequence\Game\GameParent.h"
-#include "Sequence/StageSelect.h"
+#include "Sequence/Game/GameParent.h"
+#include "Sequence/GameOver.h"
+#include "Sequence/Ending.h"
 #include "Sequence/Title.h"
-#include "StringRenderer.h"
 
 namespace Sequence
 {
+	// 싱글톤 초기화
+	Parent* Parent::mInstance = 0;
+
+	void Parent::create() {
+		ASSERT(!mInstance);
+		mInstance = new Parent();
+	}
+
+	void Parent::destroy() {
+		ASSERT(mInstance);
+		SAFE_DELETE(mInstance);
+	}
+
+	Parent* Parent::instance() {
+		return mInstance;
+	}
+
+
 	Parent::Parent() :
 		mTitle(0),
-		mStageSelect(0),
 		mGame(0),
-		mNext(SEQ_NONE),
-		mStageID(0) {
-		StringRenderer::create("data/image/font.dds");
+		mGameOver(0),
+		mEnding(0),
+		mNextSequence(NEXT_NONE),
+		mMode(MODE_NONE)
+	{
 		mTitle = new Title();
 	}
 
 	Parent::~Parent() {
 		SAFE_DELETE(mTitle);
-		SAFE_DELETE(mStageSelect);
 		SAFE_DELETE(mGame);
-		StringRenderer::destroy();
+		SAFE_DELETE(mGameOver);
+		SAFE_DELETE(mEnding);
 	}
 
 
@@ -31,45 +50,58 @@ namespace Sequence
 		if (mTitle) {
 			mTitle->update(this);
 		}
-		else if (mStageSelect) {
-			mStageSelect->update(this);
-		}
 		else if (mGame) {
 			mGame->update(this);
 		}
+		else if (mGameOver) {
+			mGameOver->update(this);
+		}
+		else if (mEnding) {
+			mEnding->update(this);
+		}
 		else {
-			HALT("BABO!"); 
+			HALT("BABO!"); // 버그 발생
 		}
 
 
-		switch (mNext)
-		{
-		case SEQ_STAGE_SELECT:
+		switch (mNextSequence) {
+		case NEXT_TITLE:
+			ASSERT(!mTitle && (mGame || mGameOver || mEnding)); // false 일시 실행
+			SAFE_DELETE(mGame);
+			SAFE_DELETE(mGameOver);
+			SAFE_DELETE(mEnding);
+			mTitle = new Title();
+			break;
+		case NEXT_GAME:
+			ASSERT(mTitle && !mGameOver && !mGame && !mEnding); 
 			SAFE_DELETE(mTitle);
+			mGame = new Game::Parent();
+			break;
+		case NEXT_GAME_OVER:
+			ASSERT(mGame && !mGameOver && !mEnding && !mTitle);
 			SAFE_DELETE(mGame);
-			mStageSelect = new StageSelect;
+			mGameOver = new GameOver();
 			break;
-		case SEQ_TITLE:
+		case NEXT_ENDING:
+			ASSERT(mGame && !mGameOver && !mEnding && !mTitle);
 			SAFE_DELETE(mGame);
-			mTitle = new Title;
-			break;
-		case SEQ_GAME:
-			SAFE_DELETE(mStageSelect);
-			ASSERT(mStageID != 0);
-			mGame = new Game::Parent(mStageID);
-			break;
+			mEnding = new Ending();
 		}
 
-		mNext = SEQ_NONE;
+		mNextSequence = NEXT_NONE; // 현재 상태 유지
 	}
 
-
-	void Parent::moveTo(SeqID next) {
-		mNext = next;
+	void Parent::moveTo(NextSequence next) {
+		ASSERT(mNextSequence == NEXT_NONE); 
+		mNextSequence = next;
 	}
 
-	void Parent::setStageID(int stageID) {
-		mStageID = stageID;
+	void Parent::setMode(Mode mode) {
+		mMode = mode;
+	}
+
+	Parent::Mode Parent::mode() const {
+		return mMode;
 	}
 
 }

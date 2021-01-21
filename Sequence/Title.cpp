@@ -1,19 +1,18 @@
-#include "GameLib\GameLib.h"
+#include "GameLib/GameLib.h"
+#include "GameLib/Framework.h"
 using namespace GameLib;
 
-#include "GameLib\Framework.h"
-#include "Sequence\Title.h"
-#include "Sequence\Parent.h"
+#include "Sequence/Title.h"
+#include "Sequence/Parent.h"
 #include "Image.h"
-#include "StringRenderer.h"
 
 namespace Sequence
 {
 	Title::Title()
+		:mImage(0),mCursor(0)
 	{
 		mImage = new Image("data/image/dummy.dds");
 	}
-
 	Title::~Title()
 	{
 		SAFE_DELETE(mImage);
@@ -21,13 +20,42 @@ namespace Sequence
 
 	void Title::update(Parent* parent)
 	{
-		if (Framework::instance().isKeyTriggered(' '))
-		{
-			parent->moveTo(Parent::SEQ_STAGE_SELECT);
-		}
-		mImage->draw();
+		Framework f = Framework::instance();
 
-		StringRenderer::Instance()->draw(0, 0, "THIS IS SIMPLE GAME");
-		StringRenderer::Instance()->draw(0, 1, "PRESS SPACE BAR");
+		if (f.isKeyTriggered('w'))
+		{
+			--mCursor;
+			if (mCursor < 0)
+				mCursor = 1;
+		}
+		else if (f.isKeyTriggered('z'))
+		{
+			++mCursor;
+			if (mCursor > 1)
+				mCursor = 0;
+		}
+		else if (f.isKeyTriggered(' '))
+		{
+			parent->moveTo(Parent::NEXT_GAME);
+
+			if (mCursor == 0) {
+				parent->setMode(Parent::MODE_1P);
+			}
+			else if (mCursor == 1)
+			{
+				parent->setMode(Parent::MODE_2P);
+			}
+			else
+			{
+				HALT("TITLE ERROR");
+			}
+			
+		}
+
+		mImage->draw();
+		f.drawDebugString(0, 0, "SIMPLE 2D GAME!!");
+		f.drawDebugString(1, 2, "1P");
+		f.drawDebugString(1, 3, "2P");
+		f.drawDebugString(0, mCursor+2, ">");	
 	}
 }
