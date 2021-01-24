@@ -1,10 +1,11 @@
 #include "GameLib/GameLib.h"
+#include "Sequence/Parent.h"
 #include "Sequence\Game\GameParent.h"
 #include "Sequence/Game/Loading.h"
 #include "Sequence/Game/Clear.h"
 #include "Sequence/Game/Menu.h"
 #include "Sequence/Game/Play.h"
-#include "Sequence/Parent.h"
+
 
 
 #include "Sequence\Game\Failure.h"
@@ -13,16 +14,16 @@
 
 #include "Sequence\Game\Ready.h"
 
-#include "State.h"
+#include "Game\State.h"
 #include "File.h"
 #include <sstream>
 
 namespace Sequence {
 	namespace Game {
-
-		Parent::Parent():
+		
+		Parent::Parent(GrandParent::Mode mode):
 			mState(0),
-			mStageID(1), // 1 스테이지에서 시작
+			mStageID(0), // 1 스테이지에서 시작
 			mLife(INITIALI_LIFE_NUMBER),
 			mNextSequence(NEXT_NONE),
 			mClear(0),
@@ -32,8 +33,15 @@ namespace Sequence {
 			mFailure(0),
 			mJudge(0)
 		{
+			if (mode == GrandParent::MODE_1P) {
+				mStageID = 1;
+			}
+			else {
+				mStageID = 0;
+			}
 			mReady = new Ready();
 		}
+
 
 
 
@@ -164,17 +172,12 @@ namespace Sequence {
 
 		void Parent::startLoading() {
 			SAFE_DELETE(mState);
-			std::ostringstream oss;
-			if (mode() == MODE_1P) {
-				oss << "data/stageData/" << mStageID << ".txt";
-			}
-			else {
-				oss << "data/stageData/9.txt"; // 멀티 플레이 맵
-			}
-			File file(oss.str().c_str()); //스트링을 const char*형으로 반환
-			mState = new State(file.data(), file.size());
+			mState = new State(mStageID);
 		}
 
+		void Parent::drawState() const {
+			mState->draw();
+		}
 
 	}
 

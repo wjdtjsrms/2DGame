@@ -42,12 +42,13 @@ namespace Sequence
 			};
 
 		public:
-			Parent();
+			Parent(GrandParent::Mode);
 			~Parent();
 			void update(GrandParent*);
 			void moveTo(NextSequence);
 
 			State* state();
+			void drawState() const;
 			bool hasFinalStageCleared() const; // 최종 스테이지 확인
 			int lifeNumber() const;
 			Mode mode() const;

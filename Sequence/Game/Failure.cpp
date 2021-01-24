@@ -3,7 +3,7 @@
 using namespace  GameLib;
 
 #include "Image.h"
-#include "State.h"
+#include "Game\State.h"
 #include "Sequence\Game\Failure.h"
 #include "Sequence\Game\GameParent.h"
 

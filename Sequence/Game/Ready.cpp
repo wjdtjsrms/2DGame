@@ -5,7 +5,7 @@ using namespace GameLib;
 #include "Sequence/Game/Ready.h"
 #include "Sequence\Game\GameParent.h"
 #include "Image.h"
-#include "State.h"
+#include "Game\State.h"
 
 namespace Sequence
 {
@@ -45,7 +45,7 @@ namespace Sequence
 				f.drawDebugString(0, 1, "READY...");
 			}
 
-			parent->state()->draw();
+			parent->drawState();
 			mImage->draw();
 			f.drawDebugString(0, 0, "[READY] : ");
 
