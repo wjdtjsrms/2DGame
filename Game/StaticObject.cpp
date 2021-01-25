@@ -1,4 +1,5 @@
 #include "GameLib\GameLib.h"
+#include "GameLib\Framework.h"
 using namespace GameLib;
 
 #include "Game\StaticObject.h"
@@ -47,8 +48,8 @@ void StaticObject::draw(int x, int y, const Image* image) const
 		floor = true;
 	}
 	image->draw(x * 16, y * 16, srcX, srcY, 16, 16); // 배경을 먼저 그린다.
-
-	if (floor || 1) // 바닥이 보인다면
+	
+	if (floor || Framework::instance().isKeyOn('t')) // 바닥이 보인다면
 	{
 		srcX = -1; // 값 판독 용
 		if (mFlags & FLAG_ITEM_BOMB) 

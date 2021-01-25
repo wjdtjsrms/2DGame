@@ -54,7 +54,7 @@ namespace Sequence
 				}
 			}
 
-			parent->state()->draw();
+			parent->drawState();
 			mImage->draw();
 
 			f.drawDebugString(0, 0, "MENU");

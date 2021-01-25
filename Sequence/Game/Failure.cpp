@@ -36,7 +36,7 @@ namespace Sequence
 					parent->moveTo(Parent::NEXT_READY);
 				}
 
-				parent->state()->draw();
+				parent->drawState();
 				mImage->draw();
 				Framework::instance().drawDebugString(0, 0, "OOPS MISTAKE");
 

@@ -1,3 +1,10 @@
-﻿  StaticObject.cpp
-d:\dream\gamelib\gamelib\src\2020_12_21\2d_game\game\staticobject.cpp(50): warning C4127: 조건식이 상수입니다.
+﻿  Play.cpp
+  Pause.cpp
+  Judge.cpp
+  Failure.cpp
+  Clear.cpp
+  Image.cpp
+  DynamicObject.cpp
+  File.cpp
+  코드를 생성하고 있습니다...
   2D_Game.vcxproj -> D:\Dream\GameLib\GameLib\src\2020_12_21\Debug\2D_Game.exe

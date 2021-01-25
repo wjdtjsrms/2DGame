@@ -37,7 +37,7 @@ namespace Sequence
 				}
 			}
 
-			parent->state()->draw();
+			parent->drawState();
 			mImage->draw();
 			Framework::instance().drawDebugString(0, 0, "CLEAR!!");
 

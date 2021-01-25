@@ -1,8 +1,9 @@
-#include "Image.h"
-#include "File.h"
-
+#include "GameLib/GameLib.h"
 #include "GameLib/Framework.h"
 using namespace GameLib;
+
+#include "Image.h"
+#include "File.h"
 
 Image::Image(const char* filename)
 	:mWidth(0), mHeight(0), mData(0)
@@ -21,8 +22,7 @@ Image::Image(const char* filename)
 
 Image::~Image()
 {
-	delete[] mData;
-	mData = 0;
+	SAFE_DELETE_ARRAY(mData);
 }
 
 int Image::height() const

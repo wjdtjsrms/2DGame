@@ -1,3 +1,4 @@
+#include "GameLib/GameLib.h"
 #include "File.h"
 #include <fstream>
 using namespace std;
@@ -16,8 +17,7 @@ File::File(const char* filename) : mSize(0),mData(0)
 
 File::~File()
 {
-	delete[] mData;
-	mData = 0;
+	SAFE_DELETE_ARRAY(mData);
 }
 
 int File::size() const

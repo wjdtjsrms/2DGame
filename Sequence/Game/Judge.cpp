@@ -55,7 +55,7 @@ namespace Sequence
 				}
 			}
 
-			parent->state()->draw();
+			parent->drawState();
 			mImage->draw();
 
 

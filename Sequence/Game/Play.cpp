@@ -57,7 +57,7 @@ namespace Sequence {
 			
 			state->update();
 			// 성능 확실하구만
-			state->draw();
+			parent->drawState();
 		}
 
 	}

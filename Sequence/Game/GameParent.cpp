@@ -6,8 +6,6 @@
 #include "Sequence/Game/Menu.h"
 #include "Sequence/Game/Play.h"
 
-
-
 #include "Sequence\Game\Failure.h"
 #include "Sequence\Game\Judge.h"
 #include "Sequence\Game\Pause.h"
@@ -41,9 +39,6 @@ namespace Sequence {
 			}
 			mReady = new Ready();
 		}
-
-
-
 
 		Parent::~Parent() {
 
@@ -138,7 +133,6 @@ namespace Sequence {
 			mNextSequence = NEXT_NONE;
 		}
 
-
 		// 자식 객체들이 이 멤버 변수를 변경한다.
 		void Parent::moveTo(NextSequence next) {
 			//ASSERT(mNextSequence == NEXT_NONE);
@@ -179,7 +173,5 @@ namespace Sequence {
 			mState->draw();
 		}
 
-	}
-
-	
+	}	
 }

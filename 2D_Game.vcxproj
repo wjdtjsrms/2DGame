@@ -144,6 +144,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="File.cpp" />
+    <ClCompile Include="Game\DynamicObject.cpp" />
     <ClCompile Include="Game\State.cpp" />
     <ClCompile Include="Game\StaticObject.cpp" />
     <ClCompile Include="Image.cpp" />
@@ -163,6 +164,7 @@
   <ItemGroup>
     <ClInclude Include="Array2D.h" />
     <ClInclude Include="File.h" />
+    <ClInclude Include="Game\DynamicObject.h" />
     <ClInclude Include="Game\State.h" />
     <ClInclude Include="Game\StaticObject.h" />
     <ClInclude Include="Image.h" />

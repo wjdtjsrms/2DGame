@@ -67,6 +67,9 @@
     <ClCompile Include="Game\StaticObject.cpp">
       <Filter>State</Filter>
     </ClCompile>
+    <ClCompile Include="Game\DynamicObject.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sequence\Title.h">
@@ -115,6 +118,9 @@
       <Filter>Main</Filter>
     </ClInclude>
     <ClInclude Include="Game\StaticObject.h">
+      <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\DynamicObject.h">
       <Filter>State</Filter>
     </ClInclude>
   </ItemGroup>

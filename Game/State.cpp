@@ -2,6 +2,7 @@
 
 #include "Game\State.h"
 #include "Game\StaticObject.h"
+#include "Game\DynamicObject.h"
 
 #include "Image.h"
 
@@ -33,10 +34,11 @@ namespace // 번역 단위 유효범위
 State::~State()
 {
 	SAFE_DELETE(mImage);
+	SAFE_DELETE_ARRAY(mDynamicObjects);
 }
 
 State::State(int stageID)
-	:mImage(0),mStageID(0)
+	:mImage(0),mStageID(stageID), mDynamicObjects(0),mDynamicObjectNumber(0)
 {
 	Framework f = Framework::instance(); 
 	mStaticObjects.setSize(WIDTH, HEIGHT);
@@ -49,6 +51,10 @@ State::State(int stageID)
 	// 벽돌 블럭을 기록할 영역
 	unsigned* brickList = new unsigned[n];
 	int brickNumber = 0;
+
+	// 바닥 블럭을 기록할 영역
+	unsigned* floorList = new unsigned[n];
+	int floorNumber = 0;
 
 	for (int y = 0; y < HEIGHT; ++y)
 	{
@@ -84,6 +90,11 @@ State::State(int stageID)
 					brickList[brickNumber] = (x << 16) + y;
 					++brickNumber;
 				}
+				else
+				{
+					floorList[floorNumber] = (x << 16) + y;
+					++floorNumber;
+				}
 			}
 		}
 	}
@@ -114,26 +125,60 @@ State::State(int stageID)
 			o.setFlag(StaticObject::FLAG_ITEM_BOMB);
 		}
 	}
-
 	SAFE_DELETE_ARRAY(brickList);
+
+	// 2p 인지 1p인지 구분
+	int playerNumber = (mStageID == 0) ? 2 : 1;
+	int enemyNumber = stageData.mEnemyNumber;
+	mDynamicObjectNumber = playerNumber + enemyNumber;
+	mDynamicObjects = new DynamicObject[mDynamicObjectNumber];
+
+	// 1p 위치 지정 
+	mDynamicObjects[0].set(1, 1, DynamicObject::TYPE_1P);
+	if (mStageID == 0)
+	{
+		// 2p 위치 지정 
+		mDynamicObjects[1].set(WIDTH - 2, HEIGHT - 2, DynamicObject::TYPE_2P);
+	}
+
+	for (int i = 0; i < enemyNumber; ++i)
+	{
+		int swapped = f.getRandom(floorNumber - 1 - i) + i;
+		unsigned t = floorList[i];
+		floorList[i] = floorList[swapped];
+		floorList[swapped] = t;
+
+		int x = floorList[i] >> 16;
+		int y = floorList[i] & 0xffff;
+		mDynamicObjects[playerNumber + i].set(x,y,DynamicObject::TYPE_ENEMY);
+
+	}
+	SAFE_DELETE_ARRAY(floorList);
 }
 
 void State::draw() const 
 {
+	// 벽, 바닥, 아이템
 	for (int y = 0; y < HEIGHT; ++y) {
 		for (int x = 0; x < WIDTH; ++x) {
 			mStaticObjects(x, y).draw(x, y, mImage);
 		}
 	}
+	// 플레이어, 적
+	for (int i = 0; i < mDynamicObjectNumber; ++i)
+	{
+		mDynamicObjects[i].draw(mImage);
+	}
 
-	//TODO: 전경 그리기
 	//TODO: 폭풍 그리기
 }
 
 void State::update() {
-	//TODO:
+	for (int i = 0; i < mDynamicObjectNumber; ++i)
+	{
+		mDynamicObjects[i].update();
+	}
 }
-
 
 bool State::hasCleared() const 
 {

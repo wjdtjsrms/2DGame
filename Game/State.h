@@ -4,6 +4,7 @@
 
 class Image;
 class StaticObject;
+class DynamicObject;
 
 class State {
 public:
@@ -20,10 +21,14 @@ public:
 	bool isAlive2P() const; //2P는 살아있는가?
 
 private:
-	Array2D< StaticObject > mStaticObjects; // 움직이지 않는 객체 담당
-	int mStageID;
+	// 움직이지 않는 객체 담당
+	Array2D< StaticObject > mStaticObjects; 
 
+	// 움직이는 객체 담당
+	DynamicObject* mDynamicObjects;
+	int mDynamicObjectNumber;
+
+	int mStageID;
 	Image* mImage;
-	
 };
 #endif
