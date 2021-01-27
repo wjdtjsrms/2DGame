@@ -18,8 +18,8 @@ namespace Sequence {
 			Framework f = Framework::instance();
 
 			bool cleared = state->hasCleared();
-			bool die1P = false;
-			bool die2P = false;
+			bool die1P = !state->isAlive(0);
+			bool die2P = !state->isAlive(1);
 
 			// 디버그 기능
 			if (f.isKeyTriggered('1')) { //1P 승리
@@ -46,6 +46,18 @@ namespace Sequence {
 			{   // 2인 모드 승부 결정
 				if (die1P || die2P) { 
 					parent->moveTo(Parent::NEXT_JUDGE);
+					if (die1P && die2P)
+					{
+						parent->setWinner(Parent::PLAYER_NONE);
+					}
+					else if (die1P)
+					{
+						parent->setWinner(Parent::PLAYER_2);
+					}
+					else
+					{
+						parent->setWinner(Parent::PLAYER_1);
+					}
 				}
 			}
 
@@ -56,7 +68,6 @@ namespace Sequence {
 			}
 			
 			state->update();
-			// 성능 확실하구만
 			parent->drawState();
 		}
 

@@ -58,9 +58,19 @@ namespace Sequence
 			parent->drawState();
 			mImage->draw();
 
-
-			f.drawDebugString(0, 0, "IF IP WIN");
-			f.drawDebugString(0, 1, "IF IP WIN");
+			Parent::PlayerID winner = parent->winner();
+			if (winner == Parent::PLAYER_1)
+			{
+				f.drawDebugString(0, 0, "1P WIN");
+			}
+			else if (winner == Parent::PLAYER_2)
+			{
+				f.drawDebugString(0, 1, "2P WIN");
+			}
+			else
+			{
+				f.drawDebugString(0, 1, "Draw");
+			}
 
 			f.drawDebugString(1, 3, "RESTART");
 			f.drawDebugString(1, 4, "BACK TITLE");

@@ -105,9 +105,6 @@
     <ClInclude Include="Game\State.h">
       <Filter>State</Filter>
     </ClInclude>
-    <ClInclude Include="Pause.h">
-      <Filter>Sequence\Game</Filter>
-    </ClInclude>
     <ClInclude Include="Array2D.h">
       <Filter>Main</Filter>
     </ClInclude>
@@ -122,6 +119,9 @@
     </ClInclude>
     <ClInclude Include="Game\DynamicObject.h">
       <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="Sequence\Game\Pause.h">
+      <Filter>Sequence\Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

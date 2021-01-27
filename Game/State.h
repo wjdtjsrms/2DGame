@@ -17,10 +17,12 @@ public:
 	void draw() const;
 	// 시퀸스 쪽에서 요구되는 기능
 	bool hasCleared() const;
-	bool isAlive1P() const; //1P는 살아있는가?
-	bool isAlive2P() const; //2P는 살아있는가?
+	bool isAlive(int playerID) const;
+
 
 private:
+	void setFire(int x, int y);
+
 	// 움직이지 않는 객체 담당
 	Array2D< StaticObject > mStaticObjects; 
 

@@ -36,12 +36,12 @@ namespace Sequence
 					parent->moveTo(Parent::NEXT_READY);
 				}
 
-				parent->drawState();
-				mImage->draw();
-				Framework::instance().drawDebugString(0, 0, "OOPS MISTAKE");
-
-				++mCount;
 			}
+
+			parent->drawState();
+			mImage->draw();
+			Framework::instance().drawDebugString(0, 0, "OOPS MISTAKE");
+			++mCount;
 		}
 	}
 }

@@ -40,13 +40,19 @@ namespace Sequence
 				MODE_2P,
 				MODE_NONE,
 			};
-
+			enum PlayerID {
+				PLAYER_1,
+				PLAYER_2,
+				PLAYER_NONE,
+			};
 		public:
 			Parent(GrandParent::Mode);
 			~Parent();
 			void update(GrandParent*);
 			void moveTo(NextSequence);
 
+			PlayerID winner() const;
+			void setWinner(PlayerID);
 			State* state();
 			void drawState() const;
 			bool hasFinalStageCleared() const; // 최종 스테이지 확인
@@ -59,7 +65,7 @@ namespace Sequence
 			State * mState;
 			int mStageID;
 			int mLife;
-
+			PlayerID mWinner;
 			static const int FINAL_STAGE = 2;
 			static const int INITIALI_LIFE_NUMBER = 2;
 

@@ -1,10 +1,2 @@
-﻿  Play.cpp
-  Pause.cpp
-  Judge.cpp
-  Failure.cpp
-  Clear.cpp
-  Image.cpp
-  DynamicObject.cpp
-  File.cpp
-  코드를 생성하고 있습니다...
+﻿  State.cpp
   2D_Game.vcxproj -> D:\Dream\GameLib\GameLib\src\2020_12_21\Debug\2D_Game.exe

@@ -18,8 +18,8 @@
 
 namespace Sequence {
 	namespace Game {
-		
-		Parent::Parent(GrandParent::Mode mode):
+
+		Parent::Parent(GrandParent::Mode mode) :
 			mState(0),
 			mStageID(0), // 1 스테이지에서 시작
 			mLife(INITIALI_LIFE_NUMBER),
@@ -173,5 +173,13 @@ namespace Sequence {
 			mState->draw();
 		}
 
-	}	
+		Parent::PlayerID Parent::winner() const {
+			return mWinner;
+		}
+
+		void Parent::setWinner(PlayerID id) {
+			mWinner = id;
+		}
+	}
+
 }
