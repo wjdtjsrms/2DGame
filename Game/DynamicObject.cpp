@@ -3,6 +3,7 @@
 using namespace GameLib;
 
 #include "Game/DynamicObject.h"
+#include "Game\KeyBoard.h"
 #include "Image.h"
 
 namespace // 번역 단위 유효범위 
@@ -212,14 +213,8 @@ bool DynamicObject::isIntersectWall(int x, int y, int wallX, int wallY) {
 }
 
 bool DynamicObject::hasBombButtonPressed() const {
-	Framework f = Framework::instance();
 	if (mType == TYPE_PLAYER) {
-		if (mPlayerID == 0) {
-			return f.isKeyOn('v');
-		}
-		else if (mPlayerID == 1) {
-			return f.isKeyOn('l');
-		}
+		return KeyBoard::isOn(KeyBoard::ACTION, mPlayerID);
 	}
 	return false;
 }
@@ -271,36 +266,21 @@ void DynamicObject::getDirection(int * dx, int * dy) const
 
 	if (mType == TYPE_PLAYER)
 	{
-		if (mPlayerID == 0)
+		if (KeyBoard::isOn(KeyBoard::UP, mPlayerID))
 		{
-			if (f.isKeyOn('w')) {
-				*dy = -1;
-			}
-			else if (f.isKeyOn('s')) {
-				*dy = 1;
-			}
-			else if (f.isKeyOn('a')) {
-				*dx = -1;
-			}
-			else if (f.isKeyOn('d')) {
-				*dx = 1;
-			}
+			*dy = -1;
 		}
-		else if (mPlayerID == 1)
+		else if (KeyBoard::isOn(KeyBoard::DOWN, mPlayerID))
 		{
-			if (f.isKeyOn('i')) {
-				*dy = -1;
-			}
-			else if (f.isKeyOn('k')) {
-				*dy = 1;
-			}
-			else if (f.isKeyOn('j')) {
-				*dx = -1;
-			}
-			else if (f.isKeyOn('l')) {
-				*dx = 1;
-			}
-
+			*dy = 1;
+		}
+		else if (KeyBoard::isOn(KeyBoard::LEFT, mPlayerID))
+		{
+			*dx = -1;
+		}
+		else if (KeyBoard::isOn(KeyBoard::RIGHT, mPlayerID))
+		{
+			*dx = 1;
 		}
 	}
 	else if (mType == TYPE_ENEMY)

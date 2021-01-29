@@ -2,6 +2,7 @@
 #include "GameLib/Framework.h"
 using namespace GameLib;
 
+#include "Game\KeyBoard.h"
 #include "Sequence/Title.h"
 #include "Sequence/Parent.h"
 #include "Image.h"
@@ -22,19 +23,23 @@ namespace Sequence
 	{
 		Framework f = Framework::instance();
 
-		if (f.isKeyTriggered('w'))
+		if (KeyBoard::isTriggered(KeyBoard::UP))
 		{
 			--mCursor;
 			if (mCursor < 0)
+			{
 				mCursor = 1;
+			}
 		}
-		else if (f.isKeyTriggered('z'))
+		else if (KeyBoard::isTriggered(KeyBoard::DOWN))
 		{
 			++mCursor;
 			if (mCursor > 1)
+			{
 				mCursor = 0;
+			}
 		}
-		else if (f.isKeyTriggered(' '))
+		else if (KeyBoard::isTriggered(KeyBoard::ACTION))
 		{
 			parent->moveTo(Parent::NEXT_GAME);
 
@@ -49,7 +54,6 @@ namespace Sequence
 			{
 				HALT("TITLE ERROR");
 			}
-			
 		}
 
 		mImage->draw();

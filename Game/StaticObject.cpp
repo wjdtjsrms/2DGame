@@ -60,7 +60,7 @@ void StaticObject::draw(int x, int y, const Image* image) const
 	}
 	image->draw(x * 16, y * 16, srcX, srcY, 16, 16); // 배경을 먼저 그린다.
 
-	if (floor || Framework::instance().isKeyOn('t')) // 바닥이 보인다면
+	if (floor) // 바닥이 보인다면
 	{
 		srcX = -1; // 값 판독 용
 		if ((mFlags & FLAG_BOMB) && !(mFlags & FLAG_EXPLODING)) { // 폭탄을 그린다.

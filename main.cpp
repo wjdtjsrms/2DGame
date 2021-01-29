@@ -1,6 +1,7 @@
 #include "GameLib/Framework.h"
 using namespace GameLib;
 #include "Sequence/Parent.h"
+#include "Game\KeyBoard.h"
 
 namespace GameLib {
 	void Framework::update() {
@@ -13,7 +14,7 @@ namespace GameLib {
 		Sequence::Parent::instance()->update();
 
 		// 나가기 키
-		if (isKeyOn('q')) {
+		if (KeyBoard::isTriggered(KeyBoard::QUIT)) {
 			requestEnd();
 		}
 		// 종료 함수

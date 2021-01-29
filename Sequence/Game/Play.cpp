@@ -1,10 +1,12 @@
 #include "GameLib/GameLib.h"
+#include "GameLib/Input/Manager.h"
+#include "GameLib/Input/Keyboard.h"
 using namespace GameLib;
 
-#include "GameLib/Framework.h"
 #include "Sequence/Game/Play.h"
 #include "Sequence\Game\GameParent.h"
 #include "Game\State.h"
+#include "Game\KeyBoard.h"
 
 namespace Sequence {
 	namespace Game {
@@ -14,21 +16,22 @@ namespace Sequence {
 		}
 
 		void Play::update(Parent* parent) {
+
+			Input::Keyboard kb = Input::Manager::instance().keyboard();
 			State* state = parent->state();
-			Framework f = Framework::instance();
 
 			bool cleared = state->hasCleared();
 			bool die1P = !state->isAlive(0);
 			bool die2P = !state->isAlive(1);
 
 			// 디버그 기능
-			if (f.isKeyTriggered('1')) { //1P 승리
+			if (kb.isTriggered('1')) { // 2P를 죽임
 				die2P = true;
 			}
-			else if (f.isKeyTriggered('2') || f.isKeyTriggered('x')) { //2P 승리
+			else if (kb.isTriggered('2')) { // 1P를 죽임
 				die1P = true;
 			}
-			else if (f.isKeyTriggered('c')) { // 스테이지 클리어
+			else if (kb.isTriggered('c')) {
 				cleared = true;
 			}
 			
@@ -61,8 +64,8 @@ namespace Sequence {
 				}
 			}
 
-			// space를 누르면 메뉴가 나온다.
-			if (f.isKeyTriggered(' '))
+			// x를 누르면 메뉴가 나온다.
+			if (KeyBoard::isTriggered(KeyBoard::CANCLE))
 			{
 				parent->moveTo(Parent::NEXT_PAUSE);
 			}
