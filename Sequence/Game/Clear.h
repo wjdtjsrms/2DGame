@@ -1,6 +1,8 @@
 #ifndef INCLUDED_SEQUENCE_GAME_CLEAR_H
 #define INCLUDED_SEQUENCE_GAME_CLEAR_H
 
+#include "Sequence\Game\Child.h"
+
 class Image;
 
 namespace Sequence
@@ -9,7 +11,7 @@ namespace Sequence
 	{
 		class Parent;
 
-		class Clear
+		class Clear : public Child
 		{
 		public:
 			Clear();

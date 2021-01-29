@@ -1,6 +1,8 @@
 #ifndef INCLUDED_SEQUENCE_GAME_JUDGE_H
 #define INCLUDED_SEQUENCE_GAME_JUDGE_H
 
+#include "Sequence\Game\Child.h"
+
 class Image;
 
 namespace Sequence
@@ -9,7 +11,7 @@ namespace Sequence
 	{
 		class Parent;
 
-		class Judge
+		class Judge : public Child
 		{
 		public:
 			Judge();

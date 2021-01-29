@@ -1,8 +1,6 @@
 ﻿  GameParent.cpp
   코드를 생성하고 있습니다...
-  건너뛰고 있습니다... (관련된 변경 내용 없음)
-  main.cpp
-  Title.cpp
+  컴파일하고 있습니다...
   Parent.cpp
   Ready.cpp
   Play.cpp
@@ -10,12 +8,5 @@
   Judge.cpp
   Failure.cpp
   Clear.cpp
-  GameOver.cpp
-  Ending.cpp
-  Image.cpp
-  StaticObject.cpp
-  State.cpp
-  KeyBoard.cpp
-  DynamicObject.cpp
-  File.cpp
+  코드를 생성하고 있습니다...
   2D_Game.vcxproj -> D:\Dream\GameLib\GameLib\src\2020_12_21\Debug\2D_Game.exe

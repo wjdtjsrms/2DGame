@@ -1,5 +1,4 @@
 #include "GameLib/GameLib.h"
-
 #include "Sequence/Parent.h"
 #include "Sequence/Game/GameParent.h"
 #include "Sequence/GameOver.h"
@@ -27,65 +26,38 @@ namespace Sequence
 
 
 	Parent::Parent() :
-		mTitle(0),
-		mGame(0),
-		mGameOver(0),
-		mEnding(0),
 		mNextSequence(NEXT_NONE),
-		mMode(MODE_NONE)
+		mMode(MODE_NONE),
+		mChild(0)
 	{
-		mTitle = new Title();
+		mChild = new Title(); // 처음에는 title로 시작한다.
 	}
 
 	Parent::~Parent() {
-		SAFE_DELETE(mTitle);
-		SAFE_DELETE(mGame);
-		SAFE_DELETE(mGameOver);
-		SAFE_DELETE(mEnding);
+		SAFE_DELETE(mChild);
 	}
 
 
 	void Parent::update() {
-
-		if (mTitle) {
-			mTitle->update(this);
-		}
-		else if (mGame) {
-			mGame->update(this);
-		}
-		else if (mGameOver) {
-			mGameOver->update(this);
-		}
-		else if (mEnding) {
-			mEnding->update(this);
-		}
-		else {
-			HALT("BABO!"); // 버그 발생
-		}
-
+		// 가상 함수를 모르고 살다니 인생 절반 손해 봤어
+		mChild->update(this);
 
 		switch (mNextSequence) {
 		case NEXT_TITLE:
-			ASSERT(!mTitle && (mGame || mGameOver || mEnding)); // false 일시 실행
-			SAFE_DELETE(mGame);
-			SAFE_DELETE(mGameOver);
-			SAFE_DELETE(mEnding);
-			mTitle = new Title();
+			SAFE_DELETE(mChild);
+			mChild = new Title();
 			break;
 		case NEXT_GAME:
-			ASSERT(mTitle && !mGameOver && !mGame && !mEnding); 
-			SAFE_DELETE(mTitle);
-			mGame = new Game::Parent(mMode);
+			SAFE_DELETE(mChild);
+			mChild = new Game::Parent(mMode);
 			break;
 		case NEXT_GAME_OVER:
-			ASSERT(mGame && !mGameOver && !mEnding && !mTitle);
-			SAFE_DELETE(mGame);
-			mGameOver = new GameOver();
+			SAFE_DELETE(mChild);
+			mChild = new GameOver();
 			break;
 		case NEXT_ENDING:
-			ASSERT(mGame && !mGameOver && !mEnding && !mTitle);
-			SAFE_DELETE(mGame);
-			mEnding = new Ending();
+			SAFE_DELETE(mChild);
+			mChild = new Ending();
 		}
 
 		mNextSequence = NEXT_NONE; // 현재 상태 유지

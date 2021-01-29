@@ -170,8 +170,10 @@
     <ClInclude Include="Game\State.h" />
     <ClInclude Include="Game\StaticObject.h" />
     <ClInclude Include="Image.h" />
+    <ClInclude Include="Sequence\Child.h" />
     <ClInclude Include="Sequence\Ending.h" />
     <ClInclude Include="Sequence\GameOver.h" />
+    <ClInclude Include="Sequence\Game\Child.h" />
     <ClInclude Include="Sequence\Game\Clear.h" />
     <ClInclude Include="Sequence\Game\Failure.h" />
     <ClInclude Include="Sequence\Game\Judge.h" />

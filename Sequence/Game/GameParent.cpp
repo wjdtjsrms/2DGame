@@ -1,15 +1,14 @@
 #include "GameLib/GameLib.h"
 #include "Sequence/Parent.h"
+
 #include "Sequence\Game\GameParent.h"
 #include "Sequence/Game/Loading.h"
 #include "Sequence/Game/Clear.h"
 #include "Sequence/Game/Menu.h"
 #include "Sequence/Game/Play.h"
-
 #include "Sequence\Game\Failure.h"
 #include "Sequence\Game\Judge.h"
 #include "Sequence\Game\Pause.h"
-
 #include "Sequence\Game\Ready.h"
 
 #include "Game\State.h"
@@ -24,12 +23,7 @@ namespace Sequence {
 			mStageID(0), // 1 스테이지에서 시작
 			mLife(INITIALI_LIFE_NUMBER),
 			mNextSequence(NEXT_NONE),
-			mClear(0),
-			mReady(0),
-			mPause(0),
-			mPlay(0),
-			mFailure(0),
-			mJudge(0)
+			mChild(0)
 		{
 			if (mode == GrandParent::MODE_1P) {
 				mStageID = 1;
@@ -37,96 +31,56 @@ namespace Sequence {
 			else {
 				mStageID = 0;
 			}
-			mReady = new Ready();
+			mChild = new Ready();
 		}
 
 		Parent::~Parent() {
-
 			SAFE_DELETE(mState);
-			SAFE_DELETE(mClear);
-			SAFE_DELETE(mReady);
-			SAFE_DELETE(mPause);
-			SAFE_DELETE(mPlay);
-			SAFE_DELETE(mFailure);
-			SAFE_DELETE(mJudge);
+			SAFE_DELETE(mChild);
 		}
 
 		void Parent::update(GrandParent* parent) {
 
-			// 객체가 생성되었을때만 실행
-			if (mClear) {
-				mClear->update(this);
-			}
-			else if (mReady) {
-				mReady->update(this);
-			}
-			else if (mPause) {
-				mPause->update(this);
-			}
-			else if (mPlay) {
-				mPlay->update(this);
-			}
-			else if (mFailure) {
-				mFailure->update(this);
-			}
-			else if (mJudge) {
-				mJudge->update(this);
-			}
-			else {
-				HALT("bakana!"); // 유효하지 않은 값
-			}
+			mChild->update(this);
 
 			// 시퀸스 변경
 			switch (mNextSequence) {
 			case NEXT_CLEAR:
-				ASSERT(!mClear && !mReady && !mPause && mPlay && !mFailure && !mJudge);
-				SAFE_DELETE(mPlay);
-				mClear = new Clear();
+				SAFE_DELETE(mChild);
+				mChild = new Clear();
 				++mStageID; // 다음 스테이지로
 				break;
 			case NEXT_READY:
-				ASSERT(!mReady && !mPause && !mPlay && (mFailure || mClear || mJudge));
-				SAFE_DELETE(mFailure);
-				SAFE_DELETE(mClear);
-				SAFE_DELETE(mJudge);
-				mReady = new Ready();
+				SAFE_DELETE(mChild);
+				mChild = new Ready();
 				break;
 			case NEXT_PAUSE:
-				ASSERT(!mClear && !mReady && !mPause && mPlay && !mFailure && !mJudge);
-				SAFE_DELETE(mPlay);
-				mPause = new Pause();
+				SAFE_DELETE(mChild);
+				mChild = new Pause();
 				break;
 			case NEXT_PLAY:
-				ASSERT(!mClear && (mReady || mPause) && !mPlay && !mFailure && !mJudge);
-				SAFE_DELETE(mReady);
-				SAFE_DELETE(mPause);
-				mPlay = new Play();
+				SAFE_DELETE(mChild);
+				mChild = new Play();
 				break;
 			case NEXT_FAILURE:
-				ASSERT(!mClear && !mReady && !mPause && mPlay && !mFailure && !mJudge);
-				SAFE_DELETE(mPlay);
-				mFailure = new Failure();
+				SAFE_DELETE(mChild);
+				mChild = new Failure();
 				--mLife; // 목숨 하나 차감
 				break;
 			case NEXT_JUDGE:
-				ASSERT(!mClear && !mReady && !mPause && mPlay && !mFailure && !mJudge);
-				SAFE_DELETE(mPlay);
-				mJudge = new Judge();
+				SAFE_DELETE(mChild);
+				mChild = new Judge();
 				break;
 			case NEXT_ENDING:
-				ASSERT(mClear && !mReady && !mPause && !mPlay && !mFailure && !mJudge);
-				SAFE_DELETE(mClear);
+				SAFE_DELETE(mChild);
 				parent->moveTo(GrandParent::NEXT_ENDING);
 				break;
 			case NEXT_GAME_OVER:
-				ASSERT(!mClear && !mReady && !mPause && !mPlay && mFailure && !mJudge);
-				SAFE_DELETE(mFailure);
+				SAFE_DELETE(mChild);
 				parent->moveTo(GrandParent::NEXT_GAME_OVER);
 				break;
 			case NEXT_TITLE:
-				ASSERT(!mClear && !mReady && (mPause || mJudge) && !mPlay && !mFailure);
-				SAFE_DELETE(mPause);
-				SAFE_DELETE(mJudge);
+				SAFE_DELETE(mChild);
 				parent->moveTo(GrandParent::NEXT_TITLE);
 				break;
 			}

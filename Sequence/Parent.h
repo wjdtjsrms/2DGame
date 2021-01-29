@@ -3,6 +3,7 @@
 
 namespace Sequence
 {
+	class Child;
 	namespace Game
 	{
 		class Parent;
@@ -46,11 +47,7 @@ namespace Sequence
 
 		NextSequence mNextSequence;
 		Mode mMode;
-
-		Title* mTitle;
-		Game::Parent* mGame;
-		GameOver* mGameOver;
-		Ending* mEnding;
+		Child* mChild;
 
 		static Parent* mInstance;
 

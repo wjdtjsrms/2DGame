@@ -129,6 +129,12 @@
     <ClInclude Include="Game\KeyBoard.h">
       <Filter>State</Filter>
     </ClInclude>
+    <ClInclude Include="Sequence\Child.h">
+      <Filter>Sequence</Filter>
+    </ClInclude>
+    <ClInclude Include="Sequence\Game\Child.h">
+      <Filter>Sequence\Game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="data\image\BakudanBitoImage.dds">
