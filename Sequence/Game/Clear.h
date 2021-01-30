@@ -16,7 +16,7 @@ namespace Sequence
 		public:
 			Clear();
 			~Clear();
-			void update(Parent*);
+			Child* update(Parent*);
 		private:
 			Image* mImage;
 			int mCount;

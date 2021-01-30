@@ -7,6 +7,8 @@ using namespace GameLib;
 #include "Sequence/Parent.h"
 #include "Image.h"
 
+#include "Sequence\Game\GameParent.h"
+
 namespace Sequence
 {
 	Title::Title()
@@ -19,8 +21,10 @@ namespace Sequence
 		SAFE_DELETE(mImage);
 	}
 
-	void Title::update(Parent* parent)
+	Child* Title::update(Parent* parent)
 	{
+		Child* next = this;
+
 		Framework f = Framework::instance();
 
 		if (KeyBoard::isTriggered(KeyBoard::UP))
@@ -41,8 +45,6 @@ namespace Sequence
 		}
 		else if (KeyBoard::isTriggered(KeyBoard::ACTION))
 		{
-			parent->moveTo(Parent::NEXT_GAME);
-
 			if (mCursor == 0) {
 				parent->setMode(Parent::MODE_1P);
 			}
@@ -54,6 +56,8 @@ namespace Sequence
 			{
 				HALT("TITLE ERROR");
 			}
+
+			next = new Game::Parent(parent->mode());
 		}
 
 		mImage->draw();
@@ -61,5 +65,7 @@ namespace Sequence
 		f.drawDebugString(1, 2, "1P");
 		f.drawDebugString(1, 3, "2P");
 		f.drawDebugString(0, mCursor+2, ">");	
+
+		return next;
 	}
 }

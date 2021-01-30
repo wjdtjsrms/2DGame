@@ -2,9 +2,12 @@
 #include "GameLib/Framework.h"
 using namespace GameLib;
 
-#include "Game\KeyBoard.h"
 #include "Sequence/Game/Pause.h"
 #include "Sequence\Game\GameParent.h"
+#include "Sequence\Game\Play.h"
+
+#include "Game\KeyBoard.h"
+
 #include "Image.h"
 #include "Game\State.h"
 
@@ -23,10 +26,10 @@ namespace Sequence
 			SAFE_DELETE(mImage);
 		}
 
-		void Pause::update(Parent* parent)
+		Child* Pause::update(Parent* parent)
 		{
 			Framework f = Framework::instance();
-
+			Child* next = this;
 
 			if (KeyBoard::isTriggered(KeyBoard::UP))
 			{
@@ -48,7 +51,7 @@ namespace Sequence
 			{
 				if (mCursor == 0)
 				{
-					parent->moveTo(Parent::NEXT_PLAY);
+					next = new Play;
 				}
 				else if (mCursor == 1)
 				{
@@ -64,7 +67,7 @@ namespace Sequence
 			f.drawDebugString(1, 3, "TITLE");
 			f.drawDebugString(0, mCursor + 2, ">");
 
-
+			return next;
 		}
 	}
 }

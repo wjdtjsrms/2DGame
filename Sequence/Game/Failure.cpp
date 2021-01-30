@@ -2,11 +2,12 @@
 #include "GameLib/Framework.h"
 using namespace  GameLib;
 
-#include "Image.h"
-#include "Game\State.h"
 #include "Sequence\Game\Failure.h"
 #include "Sequence\Game\GameParent.h"
+#include "Sequence\Game\Ready.h"
 
+#include "Game\State.h"
+#include "Image.h"
 
 namespace Sequence
 {
@@ -23,8 +24,10 @@ namespace Sequence
 			SAFE_DELETE(mImage);
 		}
 
-		void Failure::update(Parent* parent)
+		Child* Failure::update(Parent* parent)
 		{
+			Child* next = this;
+
 			if (mCount == 60) // 1ÃÊ°¡ Áö³ª¸é
 			{
 				if (parent->lifeNumber() == 0) // ¸ñ¼ûÀÌ ´Ù ¶³¾îÁ®¼­ »ç¸Á
@@ -33,15 +36,16 @@ namespace Sequence
 				}
 				else
 				{
-					parent->moveTo(Parent::NEXT_READY);
+					next = new Ready;
 				}
 
 			}
-
 			parent->drawState();
 			mImage->draw();
 			Framework::instance().drawDebugString(0, 0, "OOPS MISTAKE");
 			++mCount;
+
+			return next;
 		}
 	}
 }

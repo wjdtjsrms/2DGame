@@ -8,21 +8,9 @@ namespace Sequence
 	{
 		class Parent;
 	}
-	class Title;
-	class GameOver;
-	class Ending;
-
 	class Parent
 	{
 	public:
-		enum NextSequence {
-			NEXT_TITLE,
-			NEXT_GAME,
-			NEXT_GAME_OVER,
-			NEXT_ENDING,
-
-			NEXT_NONE,
-		};
 		enum Mode {
 			MODE_1P,
 			MODE_2P,
@@ -30,13 +18,12 @@ namespace Sequence
 			MODE_NONE,
 		};
 
-
 	public:
 		void update();
-		void moveTo(NextSequence);
 		Mode mode() const;
 		void setMode(Mode);
 
+		// ½Ì±ÛÅæ °ü·Ã ÇÔ¼öµé
 		static void create();
 		static void destroy();
 		static Parent* instance();
@@ -45,12 +32,9 @@ namespace Sequence
 		Parent();
 		~Parent();
 
-		NextSequence mNextSequence;
 		Mode mMode;
 		Child* mChild;
-
 		static Parent* mInstance;
-
 	};
 } 
 #endif

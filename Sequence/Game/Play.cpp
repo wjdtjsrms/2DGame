@@ -5,6 +5,11 @@ using namespace GameLib;
 
 #include "Sequence/Game/Play.h"
 #include "Sequence\Game\GameParent.h"
+#include "Sequence\Game\Clear.h"
+#include "Sequence\Game\Failure.h"
+#include "Sequence\Game\Judge.h"
+#include "Sequence\Game\Pause.h"
+
 #include "Game\State.h"
 #include "Game\KeyBoard.h"
 
@@ -15,10 +20,11 @@ namespace Sequence {
 		Play::~Play() { 
 		}
 
-		void Play::update(Parent* parent) {
+		Child* Play::update(Parent* parent) {
 
 			Input::Keyboard kb = Input::Manager::instance().keyboard();
 			State* state = parent->state();
+			Child* next = this;
 
 			bool cleared = state->hasCleared();
 			bool die1P = !state->isAlive(0);
@@ -39,16 +45,18 @@ namespace Sequence {
 			{
 				// 1인 모드 스테이지 클리어
 				if (cleared && !die1P) {
-					parent->moveTo(Parent::NEXT_CLEAR);
+					parent->goToNextStage();
+					next = new Clear;
 				}
 				else if (die1P) {
-					parent->moveTo(Parent::NEXT_FAILURE);
+					parent->reduceLife();
+					next = new Failure;
 				}
 			}
 			else 
 			{   // 2인 모드 승부 결정
 				if (die1P || die2P) { 
-					parent->moveTo(Parent::NEXT_JUDGE);
+					next = new Judge;
 					if (die1P && die2P)
 					{
 						parent->setWinner(Parent::PLAYER_NONE);
@@ -67,11 +75,13 @@ namespace Sequence {
 			// x를 누르면 메뉴가 나온다.
 			if (KeyBoard::isTriggered(KeyBoard::CANCLE))
 			{
-				parent->moveTo(Parent::NEXT_PAUSE);
+				next = new Pause;
 			}
 			
 			state->update();
 			parent->drawState();
+
+			return next;
 		}
 
 	}

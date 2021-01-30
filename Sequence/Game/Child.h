@@ -9,7 +9,7 @@ namespace Sequence
 		{
 		public:
 			virtual ~Child() {}; // 단순 가상 함수
-			virtual void update(Parent*) = 0; // 순수 가상 함수
+			virtual Child* update(Parent*) = 0; // 순수 가상 함수
 		};
 	}
 }

@@ -12,7 +12,7 @@ namespace Sequence {
 		public:
 			Play();
 			~Play();
-			void update(Parent*);
+			Child* update(Parent*);
 		};
 
 	} //namespace Game

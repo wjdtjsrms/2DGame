@@ -2,13 +2,15 @@
 #include "GameLib\Framework.h"
 using namespace GameLib;
 
-#include "Image.h"
-#include "Game\KeyBoard.h"
-#include "Game\State.h"
 #include "Sequence\Game\Judge.h"
 #include "Sequence\Game\GameParent.h"
+#include "Sequence\Game\Ready.h"
 
 
+#include "Game\KeyBoard.h"
+#include "Game\State.h"
+
+#include "Image.h"
 namespace Sequence
 {
 	namespace Game
@@ -24,9 +26,10 @@ namespace Sequence
 			SAFE_DELETE(mImage);
 		}
 
-		void Judge::update(Parent* parent)
+		Child* Judge::update(Parent* parent)
 		{
 			Framework f = Framework::instance();
+			Child* next = this;
 
 			if (KeyBoard::isTriggered(KeyBoard::UP))
 			{
@@ -48,7 +51,7 @@ namespace Sequence
 			{
 				if (mCursor == 0)
 				{
-					parent->moveTo(Parent::NEXT_READY);
+					next = new Ready;
 				}
 				else if (mCursor == 1)
 				{
@@ -78,7 +81,7 @@ namespace Sequence
 
 			f.drawDebugString(0, mCursor + 3, ">");
 
-
+			return next;
 		}
 	}
 }

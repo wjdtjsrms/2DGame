@@ -2,6 +2,7 @@
 #include "GameLib/Framework.h"
 using namespace GameLib;
 
+#include "Sequence\Title.h"
 #include "Sequence/GameOver.h"
 #include "Sequence/Parent.h"
 #include "Image.h"
@@ -17,16 +18,18 @@ namespace Sequence {
 	}
 
 	// 1초 대기 후 타이틀로
-	void GameOver::update(Parent* parent) {
-		
+	Child* GameOver::update(Parent* ) {
+		Child* next = this;
 		if (mCount == 60)
 		{
-			parent->moveTo(Parent::NEXT_TITLE);
+			next = new Title;
 		}
 		
 		Framework::instance().drawDebugString(0, 0, "GAME OVER");
 		mImage->draw();
 		++mCount;
+
+		return next;
 	}
 
 } 

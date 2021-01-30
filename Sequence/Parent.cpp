@@ -1,8 +1,5 @@
 #include "GameLib/GameLib.h"
 #include "Sequence/Parent.h"
-#include "Sequence/Game/GameParent.h"
-#include "Sequence/GameOver.h"
-#include "Sequence/Ending.h"
 #include "Sequence/Title.h"
 
 namespace Sequence
@@ -26,7 +23,6 @@ namespace Sequence
 
 
 	Parent::Parent() :
-		mNextSequence(NEXT_NONE),
 		mMode(MODE_NONE),
 		mChild(0)
 	{
@@ -40,32 +36,14 @@ namespace Sequence
 
 	void Parent::update() {
 		// 가상 함수를 모르고 살다니 인생 절반 손해 봤어
-		mChild->update(this);
-
-		switch (mNextSequence) {
-		case NEXT_TITLE:
+		Child* nextChild = mChild->update(this);
+		if (nextChild != mChild)
+		{
 			SAFE_DELETE(mChild);
-			mChild = new Title();
-			break;
-		case NEXT_GAME:
-			SAFE_DELETE(mChild);
-			mChild = new Game::Parent(mMode);
-			break;
-		case NEXT_GAME_OVER:
-			SAFE_DELETE(mChild);
-			mChild = new GameOver();
-			break;
-		case NEXT_ENDING:
-			SAFE_DELETE(mChild);
-			mChild = new Ending();
+			mChild = nextChild;
 		}
 
-		mNextSequence = NEXT_NONE; // 현재 상태 유지
-	}
-
-	void Parent::moveTo(NextSequence next) {
-		ASSERT(mNextSequence == NEXT_NONE); 
-		mNextSequence = next;
+		nextChild = 0;
 	}
 
 	void Parent::setMode(Mode mode) {

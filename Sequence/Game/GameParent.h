@@ -18,12 +18,6 @@ namespace Sequence
 			typedef Sequence::Parent GrandParent; // 상위 계층 객체
 
 			enum NextSequence {
-				NEXT_CLEAR,
-				NEXT_READY,
-				NEXT_PAUSE,
-				NEXT_PLAY,
-				NEXT_FAILURE,
-				NEXT_JUDGE,
 				NEXT_ENDING, // GrandParent 호출
 				NEXT_GAME_OVER, // GrandParent 호출
 				NEXT_TITLE, // GrandParent 호출
@@ -43,7 +37,7 @@ namespace Sequence
 		public:
 			Parent(GrandParent::Mode);
 			~Parent();
-			void update(GrandParent*);
+			Child* update(GrandParent*);
 			void moveTo(NextSequence);
 
 			PlayerID winner() const;
@@ -54,7 +48,8 @@ namespace Sequence
 			int lifeNumber() const;
 			Mode mode() const;
 			void startLoading();
-		
+			void reduceLife();
+			void goToNextStage();
 
 		private:
 			State * mState;

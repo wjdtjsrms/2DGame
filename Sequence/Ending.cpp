@@ -3,6 +3,7 @@
 using namespace GameLib;
 
 #include "Sequence/Ending.h"
+#include "Sequence\Title.h"
 #include "Sequence/Parent.h"
 #include "Image.h"
 
@@ -16,16 +17,19 @@ namespace Sequence {
 		SAFE_DELETE(mImage);
 	}
 
-	void Ending::update(Parent* parent) {
+	Child* Ending::update(Parent* ) {
+		Child* next = this;
 		if (mCount == 120) { //2ÃÊ ´ë±â
-			parent->moveTo(Parent::NEXT_TITLE);
+			next = new Title;
 		}
 
 		mImage->draw();
+
 		Framework f = Framework::instance();
 		f.drawDebugString(0, 0, "congratuation");
 		f.drawDebugString(0, 1, "ENDING");
 
 		++mCount;
+		return next;
 	}
 }

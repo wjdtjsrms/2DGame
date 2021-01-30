@@ -1,12 +1,13 @@
 #include "GameLib\GameLib.h"
+#include "GameLib\Framework.h"
 using namespace GameLib;
 
-#include "GameLib\Framework.h"
 #include "Sequence\Game\Clear.h"
 #include "Sequence\Game\GameParent.h"
+#include "Sequence\Game\Ready.h"
+
 #include "Image.h"
 #include "Game\State.h"
-#include "StringRenderer.h"
 
 namespace Sequence
 {
@@ -23,8 +24,9 @@ namespace Sequence
 			SAFE_DELETE(mImage);
 		}
 
-		void Clear::update(Parent* parent)
+		Child* Clear::update(Parent* parent)
 		{
+			Child* next = this;
 			if (mCount == 60) // 1ÃÊ ´ë±â
 			{
 				if (parent->hasFinalStageCleared())
@@ -33,7 +35,7 @@ namespace Sequence
 				}
 				else
 				{
-					parent->moveTo(Parent::NEXT_READY);
+					next = new Ready;
 				}
 			}
 
@@ -42,7 +44,7 @@ namespace Sequence
 			Framework::instance().drawDebugString(0, 0, "CLEAR!!");
 
 			++mCount;
-
+			return next;
 		}
 
 	}

@@ -4,6 +4,8 @@ using namespace GameLib;
 
 #include "Sequence/Game/Ready.h"
 #include "Sequence\Game\GameParent.h"
+#include "Sequence\Game\Play.h"
+
 #include "Image.h"
 #include "Game\State.h"
 
@@ -22,10 +24,10 @@ namespace Sequence
 			SAFE_DELETE(mImage);
 		}
 
-		void Ready::update(Parent* parent)
+		Child* Ready::update(Parent* parent)
 		{
 			Framework f = Framework::instance();
-
+			Child* next = this;
 			if (!mStarted)
 			{
 				parent->startLoading();
@@ -34,7 +36,7 @@ namespace Sequence
 
 			if (mCount >= 120)
 			{
-				parent->moveTo(Parent::NEXT_PLAY);
+				next = new Play;
 			}
 			else if (mCount >= 60)
 			{
@@ -50,7 +52,7 @@ namespace Sequence
 			f.drawDebugString(0, 0, "[READY] : ");
 
 			++mCount;
-
+			return next;
 		}
 	}
 }
