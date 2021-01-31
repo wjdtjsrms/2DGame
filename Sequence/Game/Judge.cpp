@@ -6,6 +6,7 @@ using namespace GameLib;
 #include "Sequence\Game\GameParent.h"
 #include "Sequence\Game\Ready.h"
 
+#include "Sequence\Title.h"
 
 #include "Game\KeyBoard.h"
 #include "Game\State.h"
@@ -26,10 +27,10 @@ namespace Sequence
 			SAFE_DELETE(mImage);
 		}
 
-		Child* Judge::update(Parent* parent)
+		Base* Judge::update(Parent* parent)
 		{
 			Framework f = Framework::instance();
-			Child* next = this;
+			Base* next = this;
 
 			if (KeyBoard::isTriggered(KeyBoard::UP))
 			{
@@ -55,7 +56,7 @@ namespace Sequence
 				}
 				else if (mCursor == 1)
 				{
-					parent->moveTo(Parent::NEXT_TITLE);
+					next = new Title; // 상위 ㅣ계층 호출
 				}
 			}
 

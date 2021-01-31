@@ -1,9 +1,22 @@
-﻿  Ready.cpp
+﻿  Title.cpp
+  Parent.cpp
+  Ready.cpp
+  Play.cpp
   Pause.cpp
-  Judge.cpp
   GameParent.cpp
+  Judge.cpp
   Failure.cpp
   Clear.cpp
+  GameChild.cpp
+  GameOver.cpp
+  Ending.cpp
+  Child.cpp
+  main.cpp
+  Image.cpp
+  StaticObject.cpp
   State.cpp
+  KeyBoard.cpp
+  DynamicObject.cpp
+  File.cpp
   코드를 생성하고 있습니다...
   2D_Game.vcxproj -> D:\Dream\GameLib\GameLib\src\2020_12_21\Debug\2D_Game.exe

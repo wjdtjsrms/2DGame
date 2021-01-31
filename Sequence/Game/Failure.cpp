@@ -6,6 +6,8 @@ using namespace  GameLib;
 #include "Sequence\Game\GameParent.h"
 #include "Sequence\Game\Ready.h"
 
+#include "Sequence\GameOver.h"
+
 #include "Game\State.h"
 #include "Image.h"
 
@@ -24,15 +26,15 @@ namespace Sequence
 			SAFE_DELETE(mImage);
 		}
 
-		Child* Failure::update(Parent* parent)
+		Base* Failure::update(Parent* parent)
 		{
-			Child* next = this;
+			Base* next = this;
 
 			if (mCount == 60) // 1초가 지나면
 			{
 				if (parent->lifeNumber() == 0) // 목숨이 다 떨어져서 사망
 				{
-					parent->moveTo(Parent::NEXT_GAME_OVER);
+					next = new GameOver; // 상위 계층 호출
 				}
 				else
 				{

@@ -1,7 +1,7 @@
 #ifndef INCLUDED_SEQUENCE_GAME_FAILURE_H
 #define INCLUDED_SEQUENCE_GAME_FAILURE_H
 
-#include "Sequence\Game\Child.h"
+#include "Sequence\Game\GameChild.h"
 
 class Image;
 
@@ -16,7 +16,7 @@ namespace Sequence
 		public:
 			Failure();
 			~Failure();
-			Child* update(Parent*);
+			Base* update(Parent*);
 		private:
 			Image * mImage;
 			int mCount;

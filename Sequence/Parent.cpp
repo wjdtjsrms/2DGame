@@ -35,12 +35,14 @@ namespace Sequence
 
 
 	void Parent::update() {
-		// 가상 함수를 모르고 살다니 인생 절반 손해 봤어
-		Child* nextChild = mChild->update(this);
+
+		Base* nextChild = mChild->update(this);
 		if (nextChild != mChild)
 		{
+			Child* casted = dynamic_cast<Child*>(nextChild);
+			ASSERT(casted);
 			SAFE_DELETE(mChild);
-			mChild = nextChild;
+			mChild = casted;
 		}
 
 		nextChild = 0;

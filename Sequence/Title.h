@@ -14,7 +14,7 @@ namespace Sequence
 	public:
 		Title();
 		~Title();
-		Child* update(Parent*);
+		Base* update(Parent*);
 	private:
 		Image* mImage;
 		int mCursor;

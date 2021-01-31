@@ -73,6 +73,12 @@
     <ClCompile Include="Game\KeyBoard.cpp">
       <Filter>State</Filter>
     </ClCompile>
+    <ClCompile Include="Sequence\Child.cpp">
+      <Filter>Sequence</Filter>
+    </ClCompile>
+    <ClCompile Include="Sequence\Game\GameChild.cpp">
+      <Filter>Sequence\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sequence\Title.h">
@@ -132,7 +138,10 @@
     <ClInclude Include="Sequence\Child.h">
       <Filter>Sequence</Filter>
     </ClInclude>
-    <ClInclude Include="Sequence\Game\Child.h">
+    <ClInclude Include="Sequence\Base.h">
+      <Filter>Sequence</Filter>
+    </ClInclude>
+    <ClInclude Include="Sequence\Game\GameChild.h">
       <Filter>Sequence\Game</Filter>
     </ClInclude>
   </ItemGroup>

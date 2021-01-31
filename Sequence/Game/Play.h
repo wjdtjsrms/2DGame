@@ -1,7 +1,7 @@
 #ifndef INCLUDED_SEQUENCE_GAME_PLAY_H
 #define INCLUDED_SEQUENCE_GAME_PLAY_H
 
-#include "Sequence\Game\Child.h"
+#include "Sequence\Game\GameChild.h"
 
 namespace Sequence {
 	namespace Game {
@@ -12,7 +12,7 @@ namespace Sequence {
 		public:
 			Play();
 			~Play();
-			Child* update(Parent*);
+			Base* update(Parent*);
 		};
 
 	} //namespace Game

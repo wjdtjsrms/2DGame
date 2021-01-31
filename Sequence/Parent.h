@@ -4,10 +4,7 @@
 namespace Sequence
 {
 	class Child;
-	namespace Game
-	{
-		class Parent;
-	}
+
 	class Parent
 	{
 	public:

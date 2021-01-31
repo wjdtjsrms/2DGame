@@ -1,7 +1,7 @@
 #ifndef INCLUDED_SEQUENCE_GAME_JUDGE_H
 #define INCLUDED_SEQUENCE_GAME_JUDGE_H
 
-#include "Sequence\Game\Child.h"
+#include "Sequence\Game\GameChild.h"
 
 class Image;
 
@@ -16,7 +16,7 @@ namespace Sequence
 		public:
 			Judge();
 			~Judge();
-			Child* update(Parent*);
+			Base* update(Parent*);
 		private:
 			Image* mImage;
 			int mCursor;

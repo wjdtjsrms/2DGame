@@ -12,7 +12,7 @@ namespace Sequence {
 	public:
 		GameOver();
 		~GameOver();
-		Child* update(Parent*);
+		Base* update(Parent*);
 	private:
 		Image * mImage;
 		int mCount;

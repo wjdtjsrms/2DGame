@@ -18,8 +18,8 @@ namespace Sequence {
 	}
 
 	// 1초 대기 후 타이틀로
-	Child* GameOver::update(Parent* ) {
-		Child* next = this;
+	Base* GameOver::update(Parent* ) {
+		Base* next = this;
 		if (mCount == 60)
 		{
 			next = new Title;

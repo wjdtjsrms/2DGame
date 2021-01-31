@@ -12,7 +12,7 @@ namespace Sequence {
 	public:
 		Ending();
 		~Ending();
-		Child* update(Parent*);
+		Base* update(Parent*);
 	private:
 		Image * mImage;
 		int mCount;

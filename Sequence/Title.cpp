@@ -21,9 +21,9 @@ namespace Sequence
 		SAFE_DELETE(mImage);
 	}
 
-	Child* Title::update(Parent* parent)
+	Base* Title::update(Parent* parent)
 	{
-		Child* next = this;
+		Base* next = this;
 
 		Framework f = Framework::instance();
 

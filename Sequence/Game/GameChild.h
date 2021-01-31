@@ -1,15 +1,18 @@
 #ifndef INCLUDED_SEQUENCE_GAME_CHILD_H
 #define INCLUDED_SEQUENCE_GAME_CHILD_H
 
+#include "Sequence\Base.h"
+
 namespace Sequence
 {
 	namespace Game {
 		class Parent;
-		class Child
+		class Child : public Base
 		{
 		public:
-			virtual ~Child() {}; // 단순 가상 함수
-			virtual Child* update(Parent*) = 0; // 순수 가상 함수
+			virtual ~Child(); // 단순 가상 함수
+			Base* update(Base*); 
+			virtual Base* update(Parent*) = 0;
 		};
 	}
 }

@@ -37,7 +37,7 @@ namespace Sequence
 		public:
 			Parent(GrandParent::Mode);
 			~Parent();
-			Child* update(GrandParent*);
+			Base* update(GrandParent*);
 			void moveTo(NextSequence);
 
 			PlayerID winner() const;

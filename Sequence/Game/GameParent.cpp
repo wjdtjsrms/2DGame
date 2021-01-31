@@ -36,32 +36,26 @@ namespace Sequence {
 			SAFE_DELETE(mChild);
 		}
 
-		Sequence::Child * Parent::update(GrandParent*) {
+		Base* Parent::update(GrandParent*) {
 
-			Sequence::Child* next = this;
+			Base* next = this; // 상위 계층 처리
+			Base* nextChild = mChild->update(this); // 동일 계층 처리
 
-			Sequence::Game::Child* nextChild = mChild->update(this);
-
-			if (nextChild != mChild)
+			if (nextChild != mChild) // 시퀸스가 변경 되었다면
 			{
-				SAFE_DELETE(mChild);
-				mChild = nextChild;
+				Game::Child* casted = dynamic_cast<Game::Child*>(nextChild); 
+				if (casted) // nextChild가 mChild와 같은 계층이라면
+				{
+					SAFE_DELETE(mChild);
+					mChild = casted;
+				}
+				else
+				{
+					next = nextChild; // 상위 계층에다가 변경된 객체 반환
+				}
+				casted = 0;
 			}
 			nextChild = 0;
-
-			// 시퀸스 변경
-			switch (mNextSequence) {
-			case NEXT_ENDING:
-				next = new Ending;
-				break;
-			case NEXT_GAME_OVER:
-				next = new GameOver;
-				break;
-			case NEXT_TITLE:
-				next = new Title;
-				break;
-			}
-			mNextSequence = NEXT_NONE;
 
 			return next;
 		}

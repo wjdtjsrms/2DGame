@@ -20,11 +20,11 @@ namespace Sequence {
 		Play::~Play() { 
 		}
 
-		Child* Play::update(Parent* parent) {
+		Base* Play::update(Parent* parent) {
 
 			Input::Keyboard kb = Input::Manager::instance().keyboard();
 			State* state = parent->state();
-			Child* next = this;
+			Base* next = this;
 
 			bool cleared = state->hasCleared();
 			bool die1P = !state->isAlive(0);

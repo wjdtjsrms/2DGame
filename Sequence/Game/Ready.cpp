@@ -24,10 +24,10 @@ namespace Sequence
 			SAFE_DELETE(mImage);
 		}
 
-		Child* Ready::update(Parent* parent)
+		Base* Ready::update(Parent* parent)
 		{
 			Framework f = Framework::instance();
-			Child* next = this;
+			Base* next = this;
 			if (!mStarted)
 			{
 				parent->startLoading();

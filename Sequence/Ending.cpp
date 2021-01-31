@@ -17,8 +17,8 @@ namespace Sequence {
 		SAFE_DELETE(mImage);
 	}
 
-	Child* Ending::update(Parent* ) {
-		Child* next = this;
+	Base* Ending::update(Parent* ) {
+		Base* next = this;
 		if (mCount == 120) { //2√  ¥Î±‚
 			next = new Title;
 		}
