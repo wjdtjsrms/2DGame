@@ -19,9 +19,5 @@ namespace Sequence
 		Image* mImage;
 		int mCursor;
 	};
-
-
 }
-
-
 #endif

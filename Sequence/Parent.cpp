@@ -1,6 +1,7 @@
 #include "GameLib/GameLib.h"
 #include "Sequence/Parent.h"
 #include "Sequence/Title.h"
+#include "SoundManager.h"
 
 namespace Sequence
 {
@@ -26,11 +27,13 @@ namespace Sequence
 		mMode(MODE_NONE),
 		mChild(0)
 	{
+		SoundManager::create();
 		mChild = new Title(); // 처음에는 title로 시작한다.
 	}
 
 	Parent::~Parent() {
 		SAFE_DELETE(mChild);
+		SoundManager::destroy();
 	}
 
 

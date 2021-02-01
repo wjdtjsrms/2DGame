@@ -6,6 +6,7 @@ using namespace GameLib;
 #include "Sequence/Title.h"
 #include "Sequence/Parent.h"
 #include "Image.h"
+#include "SoundManager.h"
 
 #include "Sequence\Game\GameParent.h"
 
@@ -24,7 +25,8 @@ namespace Sequence
 	Base* Title::update(Parent* parent)
 	{
 		Base* next = this;
-
+		
+		SoundManager* sm = SoundManager::Instance();
 		Framework f = Framework::instance();
 
 		if (KeyBoard::isTriggered(KeyBoard::UP))
@@ -34,6 +36,7 @@ namespace Sequence
 			{
 				mCursor = 1;
 			}
+			sm->playSe(SoundManager::SE_CURSOR_MOVE);
 		}
 		else if (KeyBoard::isTriggered(KeyBoard::DOWN))
 		{
@@ -42,6 +45,7 @@ namespace Sequence
 			{
 				mCursor = 0;
 			}
+			sm->playSe(SoundManager::SE_CURSOR_MOVE);
 		}
 		else if (KeyBoard::isTriggered(KeyBoard::ACTION))
 		{
@@ -58,6 +62,7 @@ namespace Sequence
 			}
 
 			next = new Game::Parent(parent->mode());
+			sm->playSe(SoundManager::SE_SELECTION);
 		}
 
 		mImage->draw();

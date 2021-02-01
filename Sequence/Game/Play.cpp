@@ -9,6 +9,7 @@ using namespace GameLib;
 #include "Sequence\Game\Failure.h"
 #include "Sequence\Game\Judge.h"
 #include "Sequence\Game\Pause.h"
+#include "SoundManager.h"
 
 #include "Game\State.h"
 #include "Game\KeyBoard.h"
@@ -16,6 +17,8 @@ using namespace GameLib;
 namespace Sequence {
 	namespace Game {
 		Play::Play() { 
+			// 정신 나갈거 가타 정신 나갈거 가타 정신 나갈거 가타
+			//SoundManager::Instance()->playBgm(SoundManager::BGM_GAME);
 		}
 		Play::~Play() { 
 		}

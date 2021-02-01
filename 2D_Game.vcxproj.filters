@@ -79,6 +79,9 @@
     <ClCompile Include="Sequence\Game\GameChild.cpp">
       <Filter>Sequence\Game</Filter>
     </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sequence\Title.h">
@@ -143,6 +146,9 @@
     </ClInclude>
     <ClInclude Include="Sequence\Game\GameChild.h">
       <Filter>Sequence\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundManager.h">
+      <Filter>Main</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
