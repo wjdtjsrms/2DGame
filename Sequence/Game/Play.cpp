@@ -18,7 +18,7 @@ namespace Sequence {
 	namespace Game {
 		Play::Play() { 
 			// 정신 나갈거 가타 정신 나갈거 가타 정신 나갈거 가타
-			//SoundManager::Instance()->playBgm(SoundManager::BGM_GAME);
+			SoundManager::Instance()->playBgm(SoundManager::BGM_GAME);
 		}
 		Play::~Play() { 
 		}

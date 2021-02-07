@@ -17,6 +17,9 @@
     <Filter Include="Main">
       <UniqueIdentifier>{9d05619b-a21c-4393-9802-4ef2cce7055f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Main\Base">
+      <UniqueIdentifier>{4a9afa6b-2f3f-46dc-a0fc-ede019418a2c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sequence\Title.cpp">
@@ -70,9 +73,6 @@
     <ClCompile Include="Game\DynamicObject.cpp">
       <Filter>State</Filter>
     </ClCompile>
-    <ClCompile Include="Game\KeyBoard.cpp">
-      <Filter>State</Filter>
-    </ClCompile>
     <ClCompile Include="Sequence\Child.cpp">
       <Filter>Sequence</Filter>
     </ClCompile>
@@ -80,6 +80,12 @@
       <Filter>Sequence\Game</Filter>
     </ClCompile>
     <ClCompile Include="SoundManager.cpp">
+      <Filter>Main\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector2.cpp">
+      <Filter>Main\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\KeyBoard.cpp">
       <Filter>Main</Filter>
     </ClCompile>
   </ItemGroup>
@@ -117,9 +123,6 @@
     <ClInclude Include="Game\State.h">
       <Filter>State</Filter>
     </ClInclude>
-    <ClInclude Include="Array2D.h">
-      <Filter>Main</Filter>
-    </ClInclude>
     <ClInclude Include="File.h">
       <Filter>Main</Filter>
     </ClInclude>
@@ -135,9 +138,6 @@
     <ClInclude Include="Sequence\Game\Pause.h">
       <Filter>Sequence\Game</Filter>
     </ClInclude>
-    <ClInclude Include="Game\KeyBoard.h">
-      <Filter>State</Filter>
-    </ClInclude>
     <ClInclude Include="Sequence\Child.h">
       <Filter>Sequence</Filter>
     </ClInclude>
@@ -148,7 +148,16 @@
       <Filter>Sequence\Game</Filter>
     </ClInclude>
     <ClInclude Include="SoundManager.h">
+      <Filter>Main\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2.h">
+      <Filter>Main\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\KeyBoard.h">
       <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Array2D.h">
+      <Filter>Main\Base</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
